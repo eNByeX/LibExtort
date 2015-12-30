@@ -4,6 +4,9 @@ package io.github.enbyex.libextort;
  * @author soniex2
  */
 public interface Arguments {
+
+    HelpArgument setHelpArgument(String help);
+
     Argument<String> setStringArgument(String id);
 
     Argument<String> setStringArgument(String id, String defaultValue);
@@ -15,6 +18,10 @@ public interface Arguments {
     LongArgument<Long> setLongArgument(String id);
 
     LongArgument<Long> setLongArgument(String id, long defaultValue);
+
+    BooleanArgument<Boolean> setBooleanArgument(String id);
+
+    BooleanArgument<Boolean> setBooleanArgument(String id, boolean defaultValue);
 
     <T extends Enum<T>> Argument<T> setEnumArgument(String id, Class<T> type);
 
@@ -38,9 +45,27 @@ public interface Arguments {
      */
     void clear();
 
-    <T> T getArgument(Argument<T> argument);
+    String[] getArgumentStringsData(Argument<?> argument);
+
+    String getArgumentStringData(Argument<?> argument);
+
+    boolean hasArgument(Argument<?> argument);
+
+    boolean hasArguments(Argument<?> argument, int min, int max);
+
+    <T> T getArgument(Argument<T> argument, Class<T> type);
 
     int getIntArgument(IntArgument<?> argument);
 
     long getLongArgument(LongArgument<?> argument);
+
+    boolean getBooleanArgument(BooleanArgument<?> argument);
+
+    <T> T[] getArguments(Argument<T> argument, Class<T> type);
+
+    int[] getIntArguments(IntArgument<?> argument);
+
+    long[] getLongArguments(LongArgument<?> argument);
+
+    boolean[] getBooleanArguments(BooleanArgument<?> argument);
 }
